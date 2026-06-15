@@ -13,6 +13,7 @@ namespace LexiconMovieApi.Entities
         public DbSet<Genre> Genres { get; set; } = null!;
         public DbSet<MovieDetails> MoviesDetails { get; set; } = null!;
         public DbSet<Review> Reviews { get; set; } = null!;
+        public DbSet<Actor> Actors { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,7 +24,7 @@ namespace LexiconMovieApi.Entities
         {
             modelBuilder.Entity<Movie>()
                 .HasOne(m => m.Details)
-                .WithOne()
+                .WithOne(md => md.Movie)
                 .HasForeignKey<MovieDetails>(md => md.MovieId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -37,6 +38,11 @@ namespace LexiconMovieApi.Entities
                 .WithOne(r => r.Movie)
                 .HasForeignKey(r => r.MovieId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Movie>()
+                .HasMany(m => m.Actors)
+                .WithMany(a => a.Movies)
+                .UsingEntity(ma => ma.ToTable("MovieActors"));
         }
     }
 }

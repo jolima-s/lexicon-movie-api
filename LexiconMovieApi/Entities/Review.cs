@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LexiconMovieApi.Entities
 {
@@ -16,7 +17,8 @@ namespace LexiconMovieApi.Entities
         [Range(1, 5)]
         public int Rating { get; set; }
 
-        public Movie Movie { get; set; } = null!;
+        [ForeignKey("MovieId")]
+        public Movie? Movie { get; set; }
         public int MovieId { get; set; }
     }
 }

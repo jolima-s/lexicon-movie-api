@@ -17,6 +17,8 @@ namespace LexiconMovieApi.Entities
         [Precision(18, 2)]
         public decimal Budget { get; set; }
 
+        [ForeignKey("MovieId")]
+        public Movie? Movie { get; set; }
         public int MovieId { get; set; }
     }
 }
