@@ -3,12 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LexiconMovieApi.Entities
 {
-    public class Movie
+    public class Movie : EntityBase
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [Required]
         public string Title { get; set; } = string.Empty;
 
@@ -17,5 +13,11 @@ namespace LexiconMovieApi.Entities
 
         [Range(0, double.MaxValue)]
         public double Duration { get; set; }
+
+        public MovieDetails? Details { get; set; }
+
+        public ICollection<Genre> Genres { get; set; } = new List<Genre>();
+
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }

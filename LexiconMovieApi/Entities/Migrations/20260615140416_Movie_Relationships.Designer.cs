@@ -3,6 +3,7 @@ using LexiconMovieApi.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LexiconMovieApi.Entities.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    partial class MovieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260615140416_Movie_Relationships")]
+    partial class Movie_Relationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,37 +113,6 @@ namespace LexiconMovieApi.Entities.Migrations
                     b.ToTable("MoviesDetails");
                 });
 
-            modelBuilder.Entity("LexiconMovieApi.Entities.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Reviewer")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("Reviews");
-                });
-
             modelBuilder.Entity("GenreMovie", b =>
                 {
                     b.HasOne("LexiconMovieApi.Entities.Genre", null)
@@ -165,22 +137,9 @@ namespace LexiconMovieApi.Entities.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LexiconMovieApi.Entities.Review", b =>
-                {
-                    b.HasOne("LexiconMovieApi.Entities.Movie", "Movie")
-                        .WithMany("Reviews")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-                });
-
             modelBuilder.Entity("LexiconMovieApi.Entities.Movie", b =>
                 {
                     b.Navigation("Details");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }
