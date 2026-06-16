@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LexiconMovieApi.Entities
+namespace LexiconMovieApi.Data.Entities
 {
     public class MovieDetails : EntityBase
     {

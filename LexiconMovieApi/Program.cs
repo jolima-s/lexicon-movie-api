@@ -1,4 +1,4 @@
-using LexiconMovieApi.Entities;
+using LexiconMovieApi.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
