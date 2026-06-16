@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LexiconMovieApi.Entities
+namespace LexiconMovieApi.Data.Entities
 {
     public class Actor : EntityBase
     {

@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LexiconMovieApi.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace LexiconMovieApi.Entities
+namespace LexiconMovieApi.Data
 {
     public class MovieDbContext : DbContext
     {
