@@ -1,5 +1,6 @@
 using LexiconMovieApi.Data;
 using LexiconMovieApi.Data.Seed;
+using LexiconMovieApi.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddAutoMapper(
+    cfg => { },
+    typeof(MovieProfile),
+    typeof(ActorProfile),
+    typeof(GenreProfile),
+    typeof(ReviewProfile)
+);
 
 var connectionString = builder.Configuration.GetConnectionString("MovieDbConnection");
 builder.Services.AddDbContext<MovieDbContext>(options =>
