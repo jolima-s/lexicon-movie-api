@@ -13,10 +13,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddAutoMapper(
     cfg => { },
-    typeof(MovieProfile),
-    typeof(ActorProfile),
-    typeof(GenreProfile),
-    typeof(ReviewProfile)
+    AppDomain.CurrentDomain.GetAssemblies()
 );
 
 var connectionString = builder.Configuration.GetConnectionString("MovieDbConnection");
