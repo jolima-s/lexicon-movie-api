@@ -1,6 +1,5 @@
 using LexiconMovieApi.Data;
 using LexiconMovieApi.Data.Seed;
-using LexiconMovieApi.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
