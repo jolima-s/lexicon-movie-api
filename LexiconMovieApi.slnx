@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="LexiconMovieApi/LexiconMovieApi.csproj" />
+  <Project Path="LexiconMovieApi.Core/LexiconMovieApi.Core.csproj" Id="1245df9d-74dd-4d99-b4be-7ce3fa53d1f4" />
+  <Project Path="LexiconMovieApi.Data/LexiconMovieApi.Data.csproj" Id="73256ffc-a193-4c07-8151-573dfbc40278" />
+  <Project Path="LexiconMovieApi/LexiconMovieApi.Client.csproj" />
 </Solution>

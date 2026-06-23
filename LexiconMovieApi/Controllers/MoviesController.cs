@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LexiconMovieApi.Data.Entities;
+using LexiconMovieApi.Core.Entities;
 using LexiconMovieApi.Data;
 using AutoMapper;
-using LexiconMovieApi.DTOs.Movie;
+using LexiconMovieApi.Core.DTOs.Movie;
 using AutoMapper.QueryableExtensions;
 
 [Route("api/movies")]
