@@ -1,4 +1,6 @@
-﻿namespace LexiconMovieApi.Core.DomainContracts;
+﻿using LexiconMovieApi.Core.Entities;
+
+namespace LexiconMovieApi.Core.DomainContracts;
 
 public interface IUnitOfWork
 {

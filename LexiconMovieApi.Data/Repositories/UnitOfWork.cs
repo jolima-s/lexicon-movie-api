@@ -1,4 +1,5 @@
 ﻿using LexiconMovieApi.Core.DomainContracts;
+using LexiconMovieApi.Core.Entities;
 
 namespace LexiconMovieApi.Data.Repositories;
 
