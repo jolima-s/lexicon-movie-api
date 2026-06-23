@@ -12,6 +12,7 @@ public class MoviesController : ControllerBase
 {
     private readonly MovieDbContext _context;
     private readonly IMapper _mapper;
+
     public MoviesController(MovieDbContext context, IMapper mapper)
     {
         _context = context;

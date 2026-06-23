@@ -1,4 +1,5 @@
 using LexiconMovieApi.Data;
+using LexiconMovieApi.Data.Repositories;
 using LexiconMovieApi.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,8 @@ builder.Services.AddAutoMapper(
 var connectionString = builder.Configuration.GetConnectionString("MovieDbConnection");
 builder.Services.AddDbContext<MovieDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

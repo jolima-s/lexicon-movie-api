@@ -79,4 +79,21 @@ public class MovieRepository : IRepository<Movie>
 
         return movies;
     }
+
+    public async Task UpdateMovieDetailsAsync(MovieDetails movieDetails)
+    {
+        _context.MoviesDetails.Update(movieDetails);
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!await ExistsAsync(movieDetails.Id))
+                throw new KeyNotFoundException($"Movie with ID {movieDetails.Id} not found.");
+            else
+                throw;
+        }
+    }
 }
