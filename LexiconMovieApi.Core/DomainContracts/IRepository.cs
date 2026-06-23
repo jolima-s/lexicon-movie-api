@@ -1,4 +1,4 @@
-﻿namespace LexiconMovieApi.Core.Interfaces;
+﻿namespace LexiconMovieApi.Core.DomainContracts;
 
 public interface IRepository<T> where T : class
 {
