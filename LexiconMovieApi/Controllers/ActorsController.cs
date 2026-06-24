@@ -23,7 +23,7 @@ public class ActorsController : ControllerBase
 
     // GET: api/actors/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<ActorDto>> GetActor(int id)
+    public async Task<ActionResult<ActorWithMoviesDto>> GetActor(int id)
     {
         var actor = await _serviceManager.ActorService.GetActorByIdAsync(id);
 

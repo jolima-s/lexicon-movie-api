@@ -17,25 +17,21 @@ public class ActorService : IActorService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<ActorDto>> GetAllActorsAsync(bool includeMovies = false)
+    public async Task<IEnumerable<ActorDto>> GetAllActorsAsync()
     {
-        var actors = includeMovies
-            ? await _unitOfWork.Actors.GetAllWithMoviesAsync()
-            : await _unitOfWork.Actors.GetAllAsync();
+        var actors = await _unitOfWork.Actors.GetAllAsync();
         
         return _mapper.Map<IEnumerable<ActorDto>>(actors);
     }
 
-    public async Task<ActorDto> GetActorByIdAsync(int id, bool includeMovies = false)
+    public async Task<ActorWithMoviesDto> GetActorByIdAsync(int id)
     {
-        var actor = includeMovies
-            ? await _unitOfWork.Actors.GetByIdWithMoviesAsync(id)
-            : await _unitOfWork.Actors.GetByIdAsync(id);
+        var actor = await _unitOfWork.Actors.GetByIdWithMoviesAsync(id);
         
         if (actor == null)
             throw new KeyNotFoundException($"Actor with ID {id} not found.");
         
-        return _mapper.Map<ActorDto>(actor);
+        return _mapper.Map<ActorWithMoviesDto>(actor);
     }
 
     public async Task<ActorDto> CreateActorAsync(ActorCreateDto actor)
