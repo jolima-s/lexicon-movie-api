@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\LexiconMovieApi.Data\LexiconMovieApi.Data.csproj" />
   </ItemGroup>
 

@@ -1,22 +1,14 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using LexiconMovieApi.Core.DTOs.Movie;
+﻿using LexiconMovieApi.Core.DomainContracts;
 using LexiconMovieApi.Core.Entities;
-using LexiconMovieApi.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LexiconMovieApi.Data.Repositories;
 
-public class MovieRepository : IRepository<Movie>
+public class MovieRepository : IMovieRepository
 {
     private readonly MovieDbContext _context;
-    private readonly IMapper _mapper;
 
-    public MovieRepository(MovieDbContext dbContext, IMapper mapper)
-    {
-        _context = dbContext;
-        _mapper = mapper;
-    }
+    public MovieRepository(MovieDbContext dbContext) => _context = dbContext;
 
     public async Task AddAsync(Movie entity)
     {
@@ -41,17 +33,25 @@ public class MovieRepository : IRepository<Movie>
 
     public async Task<IEnumerable<Movie>> GetAllAsync()
     {
-        return await _context.Movies
-            .Include(m => m.Genres)
-            .Include(m => m.Reviews)
-            .Include(m => m.Actors)
-            .ToListAsync();
+        return await _context.Movies.ToListAsync();
     }
 
     public async Task<Movie?> GetByIdAsync(int id)
     {
         return await _context.Movies
             .SingleOrDefaultAsync(m => m.Id == id);
+    }
+
+    public async Task<Movie?> GetByIdWithDetailsAsync(int id, bool withActors = false, bool withReviews = false, bool withGenres = false)
+    {
+        IQueryable<Movie> query = _context.Movies
+            .Include(m => m.Details);
+
+        if (withActors) query = query.Include(m => m.Actors);
+        if (withReviews) query = query.Include(m => m.Reviews);
+        if (withGenres) query = query.Include(m => m.Genres);
+        
+        return await query.SingleOrDefaultAsync(m => m.Id == id);
     }
 
     public async Task UpdateAsync(Movie entity)
@@ -69,15 +69,6 @@ public class MovieRepository : IRepository<Movie>
             else
                 throw;
         }
-    }
-
-    public async Task<IEnumerable<MovieDto>> GetAllDtoAsync()
-    {
-        var movies = await _context.Movies
-        .ProjectTo<MovieDto>(_mapper.ConfigurationProvider)
-        .ToListAsync();
-
-        return movies;
     }
 
     public async Task UpdateMovieDetailsAsync(MovieDetails movieDetails)

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using LexiconMovieApi.Core.DTOs.Actor;
+using LexiconMovieApi.Core.DomainContracts;
+using LexiconMovieApi.Core.DTOs.Review;
 using LexiconMovieApi.Core.Entities;
-using LexiconMovieApi.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LexiconMovieApi.Data.Repositories;
@@ -10,13 +10,8 @@ namespace LexiconMovieApi.Data.Repositories;
 public class ReviewRepository : IRepository<Review>
 {
     private readonly MovieDbContext _context;
-    private readonly IMapper _mapper;
 
-    public ReviewRepository(MovieDbContext dbContext, IMapper mapper)
-    {
-        _context = dbContext;
-        _mapper = mapper;
-    }
+    public ReviewRepository(MovieDbContext dbContext, IMapper mapper) => _context = dbContext;
 
     public async Task AddAsync(Review entity)
     {
@@ -68,14 +63,5 @@ public class ReviewRepository : IRepository<Review>
             else
                 throw;
         }
-    }
-
-    public async Task<IEnumerable<ReviewDto>> GetAllDtoAsync()
-    {
-        var reviews = await _context.Reviews
-        .ProjectTo<ReviewDto>(_mapper.ConfigurationProvider)
-        .ToListAsync();
-
-        return reviews;
     }
 }

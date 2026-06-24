@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using LexiconMovieApi.Core.DomainContracts;
 using LexiconMovieApi.Core.DTOs.Genre;
 using LexiconMovieApi.Core.Entities;
-using LexiconMovieApi.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LexiconMovieApi.Data.Repositories;
@@ -10,13 +10,8 @@ namespace LexiconMovieApi.Data.Repositories;
 public class GenreRepository : IRepository<Genre>
 {
     private readonly MovieDbContext _context;
-    private readonly IMapper _mapper;
 
-    public GenreRepository(MovieDbContext dbContext, IMapper mapper)
-    {
-        _context = dbContext;
-        _mapper = mapper;
-    }
+    public GenreRepository(MovieDbContext dbContext, IMapper mapper) =>_context = dbContext;
 
     public async Task AddAsync(Genre entity)
     {
@@ -68,14 +63,5 @@ public class GenreRepository : IRepository<Genre>
             else
                 throw;
         }
-    }
-
-    public async Task<IEnumerable<GenreDto>> GetAllDtoAsync()
-    {
-        var genres = await _context.Genres
-        .ProjectTo<GenreDto>(_mapper.ConfigurationProvider)
-        .ToListAsync();
-
-        return genres;
     }
 }
