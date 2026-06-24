@@ -1,7 +1,5 @@
-﻿using LexiconMovieApi.Core.DTOs.Movie;
-using LexiconMovieApi.Core.DTOs.Review;
+﻿using LexiconMovieApi.Core.DTOs.Review;
 using LexiconMovieApi.Data.Contracts;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LexiconMovieApi.Client.Controllers;
