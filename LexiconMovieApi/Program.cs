@@ -1,6 +1,10 @@
+using LexiconMovieApi.Core.DomainContracts;
+using LexiconMovieApi.Core.Entities;
 using LexiconMovieApi.Data;
+using LexiconMovieApi.Data.Contracts;
 using LexiconMovieApi.Data.Repositories;
 using LexiconMovieApi.Data.Seed;
+using LexiconMovieApi.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +24,17 @@ var connectionString = builder.Configuration.GetConnectionString("MovieDbConnect
 builder.Services.AddDbContext<MovieDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IRepository<Genre>, GenreRepository>();
+builder.Services.AddScoped<IActorRepository, ActorRepository>();
+builder.Services.AddScoped<IRepository<Review>, ReviewRepository>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IActorService, ActorService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
 var app = builder.Build();
 

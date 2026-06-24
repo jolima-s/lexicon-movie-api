@@ -1,22 +1,14 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using LexiconMovieApi.Core.DTOs.Actor;
+﻿using LexiconMovieApi.Core.DomainContracts;
 using LexiconMovieApi.Core.Entities;
-using LexiconMovieApi.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LexiconMovieApi.Data.Repositories;
 
-public class ActorRepository : IRepository<Actor>
+public class ActorRepository : IActorRepository
 {
     private readonly MovieDbContext _context;
-    private readonly IMapper _mapper;
 
-    public ActorRepository(MovieDbContext dbContext, IMapper mapper)
-    {
-        _context = dbContext;
-        _mapper = mapper;
-    }
+    public ActorRepository(MovieDbContext dbContext) =>_context = dbContext;
 
     public async Task AddAsync(Actor entity)
     {
@@ -41,12 +33,22 @@ public class ActorRepository : IRepository<Actor>
 
     public async Task<IEnumerable<Actor>> GetAllAsync()
     {
+        return await _context.Actors.ToListAsync();
+    }
+
+    public async Task<IEnumerable<Actor>> GetAllWithMoviesAsync()
+    {
         return await _context.Actors
             .Include(a => a.Movies)
             .ToListAsync();
     }
 
     public async Task<Actor?> GetByIdAsync(int id)
+    {
+        return await _context.Actors.SingleOrDefaultAsync(a => a.Id == id);
+    }
+
+    public async Task<Actor?> GetByIdWithMoviesAsync(int id)
     {
         return await _context.Actors
             .Include(a => a.Movies)
@@ -68,14 +70,5 @@ public class ActorRepository : IRepository<Actor>
             else
                 throw;
         }
-    }
-
-    public async Task<IEnumerable<ActorDto>> GetAllDtoAsync()
-    {
-        var actors = await _context.Actors
-        .ProjectTo<ActorDto>(_mapper.ConfigurationProvider)
-        .ToListAsync();
-
-        return actors;
     }
 }

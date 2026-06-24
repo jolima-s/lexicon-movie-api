@@ -9,9 +9,9 @@ public class UnitOfWork : IUnitOfWork
 
     public UnitOfWork(
         MovieDbContext context,
-        IRepository<Movie> movies,
+        IMovieRepository movies,
         IRepository<Genre> genres,
-        IRepository<Actor> actors,
+        IActorRepository actors,
         IRepository<Review> reviews)
     {
         _context = context;
@@ -21,9 +21,9 @@ public class UnitOfWork : IUnitOfWork
         Reviews = reviews;
     }
 
-    public IRepository<Movie> Movies { get; private set; }
+    public IMovieRepository Movies { get; private set; }
     public IRepository<Genre> Genres { get; private set; }
-    public IRepository<Actor> Actors { get; private set; }
+    public IActorRepository Actors { get; private set; }
     public IRepository<Review> Reviews { get; private set; }
 
     public async Task CompleteAsync()

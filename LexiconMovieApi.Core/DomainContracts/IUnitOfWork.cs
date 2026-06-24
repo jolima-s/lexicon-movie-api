@@ -4,9 +4,9 @@ namespace LexiconMovieApi.Core.DomainContracts;
 
 public interface IUnitOfWork
 {
-    IRepository<Movie> Movies { get; }
+    IMovieRepository Movies { get; }
     IRepository<Genre> Genres { get; }
-    IRepository<Actor> Actors { get; }
+    IActorRepository Actors { get; }
     IRepository<Review> Reviews { get; }
 
     Task CompleteAsync();
