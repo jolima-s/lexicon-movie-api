@@ -10,5 +10,7 @@ public class ActorProfile : Profile
     {
         CreateMap<Actor, ActorDto>();
         CreateMap<Actor, ActorWithMoviesDto>();
+        CreateMap<ActorCreateDto, Actor>();
+        CreateMap<ActorUpdateDto, Actor>();
     }
 }
