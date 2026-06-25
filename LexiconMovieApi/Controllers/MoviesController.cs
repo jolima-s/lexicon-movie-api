@@ -50,6 +50,9 @@ public class MoviesController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutMovie(int? id, MovieUpdateDto movie)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
         if (id != movie.Id)
             return BadRequest();
 
@@ -74,8 +77,11 @@ public class MoviesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<MovieDto>> PostMovie(MovieCreateDto movie)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
         MovieDto entity;
-        
+
         try
         {
             entity = await _serviceManager.MovieService.CreateMovieAsync(movie);

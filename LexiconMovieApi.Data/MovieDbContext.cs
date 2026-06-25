@@ -1,9 +1,10 @@
 ﻿using LexiconMovieApi.Core.Entities;
+using LexiconMovieApi.Data.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace LexiconMovieApi.Data;
 
-public class MovieDbContext : DbContext
+public class MovieDbContext : DbContext, IMovieDbContext
 {
     public MovieDbContext(DbContextOptions<MovieDbContext> options)
     : base(options)
