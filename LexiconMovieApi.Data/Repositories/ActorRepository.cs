@@ -1,14 +1,15 @@
 ﻿using LexiconMovieApi.Core.DomainContracts;
 using LexiconMovieApi.Core.Entities;
+using LexiconMovieApi.Data.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace LexiconMovieApi.Data.Repositories;
 
 public class ActorRepository : IActorRepository
 {
-    private readonly MovieDbContext _context;
+    private readonly IMovieDbContext _context;
 
-    public ActorRepository(MovieDbContext dbContext) =>_context = dbContext;
+    public ActorRepository(IMovieDbContext dbContext) =>_context = dbContext;
 
     public async Task AddAsync(Actor entity)
     {

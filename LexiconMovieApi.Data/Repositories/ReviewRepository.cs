@@ -1,17 +1,15 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using LexiconMovieApi.Core.DomainContracts;
-using LexiconMovieApi.Core.DTOs.Review;
+﻿using LexiconMovieApi.Core.DomainContracts;
 using LexiconMovieApi.Core.Entities;
+using LexiconMovieApi.Data.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace LexiconMovieApi.Data.Repositories;
 
 public class ReviewRepository : IRepository<Review>
 {
-    private readonly MovieDbContext _context;
+    private readonly IMovieDbContext _context;
 
-    public ReviewRepository(MovieDbContext dbContext, IMapper mapper) => _context = dbContext;
+    public ReviewRepository(IMovieDbContext dbContext) => _context = dbContext;
 
     public async Task AddAsync(Review entity)
     {

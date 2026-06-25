@@ -21,7 +21,7 @@ builder.Services.AddAutoMapper(
 );
 
 var connectionString = builder.Configuration.GetConnectionString("MovieDbConnection");
-builder.Services.AddDbContext<MovieDbContext>(options =>
+builder.Services.AddDbContext<IMovieDbContext, MovieDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();

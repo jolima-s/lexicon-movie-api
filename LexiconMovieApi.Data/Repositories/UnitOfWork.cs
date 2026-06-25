@@ -1,14 +1,15 @@
 ﻿using LexiconMovieApi.Core.DomainContracts;
 using LexiconMovieApi.Core.Entities;
+using LexiconMovieApi.Data.Contracts;
 
 namespace LexiconMovieApi.Data.Repositories;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly MovieDbContext _context;
+    private readonly IMovieDbContext _context;
 
     public UnitOfWork(
-        MovieDbContext context,
+        IMovieDbContext context,
         IMovieRepository movies,
         IRepository<Genre> genres,
         IActorRepository actors,

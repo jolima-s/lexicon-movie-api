@@ -23,13 +23,12 @@ public class MovieService : IMovieService
         return _mapper.Map<IEnumerable<MovieDto>>(movies);
     }
 
-    public async Task<MovieDto> GetMovieByIdAsync(int id)
+    public async Task<MovieDto?> GetMovieByIdAsync(int id)
     {
         var movie = await _unitOfWork.Movies.GetByIdAsync(id);
-        if (movie == null)
-            throw new KeyNotFoundException($"Movie with ID {id} not found.");
-
-        return _mapper.Map<MovieDto>(movie);
+        return movie == null
+        ? null
+        : _mapper.Map<MovieDto>(movie);
     }
 
     public async Task<MovieDetailedDto> GetMovieWithDetailsAsync(int id, bool withActors = false, bool withReviews = false, bool withGenres = false)
