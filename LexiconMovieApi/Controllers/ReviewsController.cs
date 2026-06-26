@@ -1,18 +1,21 @@
-﻿using LexiconMovieApi.Core.DTOs.Review;
+﻿using Asp.Versioning;
+using LexiconMovieApi.Core.DTOs.Review;
 using LexiconMovieApi.Data.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LexiconMovieApi.Client.Controllers;
 
 [Route("api/reviews")]
+[Route("api/v{version:apiVersion}/reviews")]
 [ApiController]
+[ApiVersion("1.0")]
 public class ReviewsController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
 
     public ReviewsController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
-    // GET: api/reviews
+    // GET: api/v1/reviews
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ReviewDto>>> GetReviews()
     {
@@ -21,7 +24,7 @@ public class ReviewsController : ControllerBase
         return Ok(reviews);
     }
 
-    // GET: api/reviews/5
+    // GET: api/v1/reviews/5
     [HttpGet("{id}")]
     public async Task<ActionResult<ReviewDto>> GetReview(int id)
     {
@@ -33,7 +36,7 @@ public class ReviewsController : ControllerBase
         return Ok(review);
     }
 
-    // PUT: api/reviews/5
+    // PUT: api/v1/reviews/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutReview(int? id, ReviewUpdateDto review)
@@ -57,7 +60,7 @@ public class ReviewsController : ControllerBase
         return NoContent();
     }
 
-    // POST: api/reviews
+    // POST: api/v1/reviews
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<ReviewDto>> PostReview(ReviewCreateDto review)
@@ -73,10 +76,10 @@ public class ReviewsController : ControllerBase
             return StatusCode(500, "An error occurred while creating the review.");
         }
 
-        return CreatedAtAction("GetReview", entity);
+        return CreatedAtAction("GetReview", new { id = entity.Id }, entity);
     }
 
-    // DELETE: api/reviews/5
+    // DELETE: api/v1/reviews/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteReview(int? id)
     {

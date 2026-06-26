@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using LexiconMovieApi.Core.DTOs.Movie;
 using LexiconMovieApi.Data.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -5,14 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace LexiconMovieApi.Client.Controllers;
 
 [Route("api/movies")]
+[Route("api/v{version:apiVersion}/movies")]
 [ApiController]
+[ApiVersion("1.0")]
 public class MoviesController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
 
     public MoviesController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
-    // GET: api/movies
+    // GET: api/v1/movies
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MovieDto>>> GetMovies()
     {
@@ -21,7 +24,7 @@ public class MoviesController : ControllerBase
         return Ok(movies);
     }
 
-    // GET: api/movies/5
+    // GET: api/v1/movies/5
     [HttpGet("{id}")]
     public async Task<ActionResult<MovieDto>> GetMovie(int id)
     {
@@ -33,7 +36,7 @@ public class MoviesController : ControllerBase
         return Ok(movie);
     }
 
-    // GET: api/movies/5/details
+    // GET: api/v1/movies/5/details
     [HttpGet("{id}/details")]
     public async Task<ActionResult<MovieDetailedDto>> GetMovieWithDetails(int id, bool withActors = false, bool withReviews = false, bool withGenres = false)
     {
@@ -45,7 +48,7 @@ public class MoviesController : ControllerBase
         return Ok(movie);
     }
 
-    // PUT: api/movies/5
+    // PUT: api/v1/movies/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutMovie(int? id, MovieUpdateDto movie)
@@ -72,7 +75,7 @@ public class MoviesController : ControllerBase
         return NoContent();
     }
 
-    // POST: api/movies
+    // POST: api/v1/movies
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<MovieDto>> PostMovie(MovieCreateDto movie)
@@ -94,7 +97,7 @@ public class MoviesController : ControllerBase
         return CreatedAtAction("GetMovie", entity);
     }
 
-    // DELETE: api/movies/5
+    // DELETE: api/v1/movies/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMovie(int? id)
     {

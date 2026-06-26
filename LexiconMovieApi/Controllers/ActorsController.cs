@@ -1,18 +1,21 @@
-﻿using LexiconMovieApi.Core.DTOs.Actor;
+﻿using Asp.Versioning;
+using LexiconMovieApi.Core.DTOs.Actor;
 using LexiconMovieApi.Data.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LexiconMovieApi.Client.Controllers;
 
 [Route("api/actors")]
+[Route("api/v{version:apiVersion}/actors")]
 [ApiController]
+[ApiVersion("1.0")]
 public class ActorsController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
 
     public ActorsController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
-    // GET: api/actors
+    // GET: api/v1/actors
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ActorDto>>> GetActors()
     {
@@ -21,7 +24,7 @@ public class ActorsController : ControllerBase
         return Ok(actors);
     }
 
-    // GET: api/actors/5
+    // GET: api/v1/actors/5
     [HttpGet("{id}")]
     public async Task<ActionResult<ActorWithMoviesDto>> GetActor(int id)
     {
@@ -33,7 +36,7 @@ public class ActorsController : ControllerBase
         return Ok(actor);
     }
 
-    // PUT: api/actors/5
+    // PUT: api/v1/actors/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutActor(int? id, ActorUpdateDto actor)
@@ -57,7 +60,7 @@ public class ActorsController : ControllerBase
         return NoContent();
     }
 
-    // POST: api/actors
+    // POST: api/v1/actors
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<ActorDto>> PostActor(ActorCreateDto actor)
@@ -76,7 +79,7 @@ public class ActorsController : ControllerBase
         return CreatedAtAction("GetActor", new { id = entity.Id }, entity);
     }
 
-    // DELETE: api/actors/5
+    // DELETE: api/v1/actors/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteActor(int? id)
     {
@@ -99,8 +102,8 @@ public class ActorsController : ControllerBase
         return NoContent();
     }
 
-    // POST: api/movies/2/actors/4
-    [HttpPost("api/movies/{movieId}/actors/{actorId}")]
+    // POST: api/v1/movies/2/actors/4
+    [HttpPost("api/v1/movies/{movieId}/actors/{actorId}")]
     public async Task<IActionResult> AddActorToMovie(int movieId, int actorId)
     {
         try
