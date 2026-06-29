@@ -1,18 +1,21 @@
-﻿using LexiconMovieApi.Core.DTOs.Genre;
+﻿using Asp.Versioning;
+using LexiconMovieApi.Core.DTOs.Genre;
 using LexiconMovieApi.Data.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LexiconMovieApi.Client.Controllers;
 
 [Route("api/genres")]
+[Route("api/v{version:apiVersion}/genres")]
 [ApiController]
+[ApiVersion("2.0")]
 public class GenreController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
 
     public GenreController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
-    // GET: api/genres
+    // GET: api/v1/genres
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GenreDto>>> GetGenres()
     {
@@ -21,7 +24,7 @@ public class GenreController : ControllerBase
         return Ok(genres);
     }
 
-    // GET: api/genres/5
+    // GET: api/v1/genres/5
     [HttpGet("{id}")]
     public async Task<ActionResult<GenreWithMoviesDto>> GetGenre(int id)
     {
@@ -33,7 +36,7 @@ public class GenreController : ControllerBase
         return Ok(genre);
     }
 
-    // PUT: api/genres/5
+    // PUT: api/v1/genres/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[HttpPut("{id}")]
     //public async Task<IActionResult> PutGenre(int? id, GenreUpdateDto genre)
@@ -57,7 +60,7 @@ public class GenreController : ControllerBase
     //    return NoContent();
     //}
 
-    // POST: api/genres
+    // POST: api/v1/genres
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[HttpPost]
     //public async Task<ActionResult<GenreDto>> PostGenre(GenreCreateDto genre)
@@ -76,7 +79,7 @@ public class GenreController : ControllerBase
     //    return CreatedAtAction("GetGenre", new { id = entity.Id }, entity);
     //}
 
-    // DELETE: api/genres/5
+    // DELETE: api/v1/genres/5
     //[HttpDelete("{id}")]
     //public async Task<IActionResult> DeleteGenre(int? id)
     //{
