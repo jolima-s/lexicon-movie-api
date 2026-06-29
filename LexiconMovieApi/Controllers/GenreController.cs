@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using LexiconMovieApi.Core.DTOs.Genre;
+using LexiconMovieApi.Core.DTOs.Review;
 using LexiconMovieApi.Data.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,68 +38,79 @@ public class GenreController : ControllerBase
     }
 
     // PUT: api/v1/genres/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    //[HttpPut("{id}")]
-    //public async Task<IActionResult> PutGenre(int? id, GenreUpdateDto genre)
-    //{
-    //    if (id != genre.Id)
-    //        return BadRequest();
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutGenre(int? id, GenreUpdateDto genre)
+    {
+        //if (id != genre.Id)
+        //    return BadRequest();
 
-    //    try
-    //    {
-    //        await _serviceManager.GenreService.UpdateGenreAsync(genre);
-    //    }
-    //    catch (KeyNotFoundException)
-    //    {
-    //        return NotFound();
-    //    }
-    //    catch
-    //    {
-    //        return StatusCode(500, "An error occurred while updating the genre.");
-    //    }
+        //try
+        //{
+        //    await _serviceManager.GenreService.UpdateGenreAsync(genre);
+        //}
+        //catch (KeyNotFoundException)
+        //{
+        //    return NotFound();
+        //}
+        //catch
+        //{
+        //    return StatusCode(500, "An error occurred while updating the genre.");
+        //}
 
-    //    return NoContent();
-    //}
+        //return NoContent();
+
+        return StatusCode(501, "Not Implemented: Updating genres is not supported in this version of the API.");
+    }
+
+    // PATCH: api/v1/genres/5
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchGenre(int? id, GenreUpdateDto genre)
+    {
+        return StatusCode(501, "Not Implemented: Partially updating genres is not supported in this version of the API.");
+    }
 
     // POST: api/v1/genres
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    //[HttpPost]
-    //public async Task<ActionResult<GenreDto>> PostGenre(GenreCreateDto genre)
-    //{
-    //    GenreDto entity;
+    [HttpPost]
+    public async Task<ActionResult<GenreDto>> PostGenre(GenreCreateDto genre)
+    {
+        //GenreDto entity;
 
-    //    try
-    //    {
-    //        entity = await _serviceManager.GenreService.CreateGenreAsync(genre);
-    //    }
-    //    catch
-    //    {
-    //        return StatusCode(500, "An error occurred while creating the genre.");
-    //    }
+        //try
+        //{
+        //    entity = await _serviceManager.GenreService.CreateGenreAsync(genre);
+        //}
+        //catch
+        //{
+        //    return StatusCode(500, "An error occurred while creating the genre.");
+        //}
 
-    //    return CreatedAtAction("GetGenre", new { id = entity.Id }, entity);
-    //}
+        //return CreatedAtAction("GetGenre", new { id = entity.Id }, entity);
+
+        return StatusCode(501, "Not Implemented: Posting genres is not supported in this version of the API.");
+    }
 
     // DELETE: api/v1/genres/5
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteGenre(int? id)
-    //{
-    //    if (id == null)
-    //        return BadRequest();
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteGenre(int? id)
+    {
+        //if (id == null)
+        //    return BadRequest();
 
-    //    try
-    //    {
-    //        await _serviceManager.GenreService.DeleteGenreAsync(id.Value);
-    //    }
-    //    catch (KeyNotFoundException)
-    //    {
-    //        return NotFound();
-    //    }
-    //    catch
-    //    {
-    //        return StatusCode(500, "An error occurred while deleting the genre.");
-    //    }
+        //try
+        //{
+        //    await _serviceManager.GenreService.DeleteGenreAsync(id.Value);
+        //}
+        //catch (KeyNotFoundException)
+        //{
+        //    return NotFound();
+        //}
+        //catch
+        //{
+        //    return StatusCode(500, "An error occurred while deleting the genre.");
+        //}
 
-    //    return NoContent();
-    //}
+        //return NoContent();
+
+        return StatusCode(501, "Not Implemented: Deleting genres is not supported in this version of the API.");
+    }
 }

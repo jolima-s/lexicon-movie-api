@@ -17,7 +17,7 @@ public class MoviesControllerTests
     {
         // Arrange
         var mockServiceManager = new Mock<IServiceManager>();
-        mockServiceManager.Setup(service => service.MovieService.GetAllMoviesAsync())
+        mockServiceManager.Setup(service => service.MovieService.GetMoviesAsync())
             .ReturnsAsync(new List<MovieDto> { new MovieDto { Id = 1, Title = "Test Movie" } });
         var controller = new MoviesController(mockServiceManager.Object);
 

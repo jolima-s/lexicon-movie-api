@@ -37,6 +37,18 @@ public class MovieRepository : IMovieRepository
         return await _context.Movies.ToListAsync();
     }
 
+    public async Task<IEnumerable<Movie>> GetMoviesAsync(int? releaseYear = null, double? duration = null)
+    {
+        IQueryable<Movie> query = _context.Movies;
+
+        if (releaseYear.HasValue)
+            query = query.Where(m => m.ReleaseYear == releaseYear.Value);
+        if (duration.HasValue)
+            query = query.Where(m => m.Duration == duration.Value);
+
+        return await query.ToListAsync();
+    }
+
     public async Task<Movie?> GetByIdAsync(int id)
     {
         return await _context.Movies

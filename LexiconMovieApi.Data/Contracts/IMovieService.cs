@@ -4,7 +4,8 @@ namespace LexiconMovieApi.Data.Contracts;
 
 public interface IMovieService
 {
-    Task<IEnumerable<MovieDto>> GetAllMoviesAsync();
+    Task<IEnumerable<MovieDto>> GetMoviesAsync();
+    Task<IEnumerable<MovieDto>> GetMoviesAsync(int? releaseYear = null, double? duration = null);
     Task<MovieDto?> GetMovieByIdAsync(int id);
     Task<MovieDetailedDto> GetMovieWithDetailsAsync(int id, bool withActors = false, bool withReviews = false, bool withGenres = false);
     Task UpdateMovieAsync(MovieUpdateDto updateDto);

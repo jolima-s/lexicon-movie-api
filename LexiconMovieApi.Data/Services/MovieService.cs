@@ -17,9 +17,15 @@ public class MovieService : IMovieService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
+    public async Task<IEnumerable<MovieDto>> GetMoviesAsync()
     {
         var movies = await _unitOfWork.Movies.GetAllAsync();
+        return _mapper.Map<IEnumerable<MovieDto>>(movies);
+    }
+
+    public async Task<IEnumerable<MovieDto>> GetMoviesAsync(int? releaseYear = null, double? duration = null)
+    {
+        var movies = await _unitOfWork.Movies.GetMoviesAsync(releaseYear, duration);
         return _mapper.Map<IEnumerable<MovieDto>>(movies);
     }
 

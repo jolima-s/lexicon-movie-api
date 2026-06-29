@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using LexiconMovieApi.Core.DTOs.Actor;
+using LexiconMovieApi.Core.DTOs.Genre;
 using LexiconMovieApi.Data.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,7 +38,6 @@ public class ActorsController : ControllerBase
     }
 
     // PUT: api/v1/actors/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutActor(int? id, ActorUpdateDto actor)
     {
@@ -60,8 +60,14 @@ public class ActorsController : ControllerBase
         return NoContent();
     }
 
+    // PATCH: api/v1/actors/5
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchActor(int? id, ActorUpdateDto actor)
+    {
+        return StatusCode(501, "Not Implemented: Partially updating actors is not supported in this version of the API.");
+    }
+
     // POST: api/v1/actors
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<ActorDto>> PostActor(ActorCreateDto actor)
     {

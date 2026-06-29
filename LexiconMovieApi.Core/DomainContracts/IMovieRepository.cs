@@ -8,4 +8,5 @@ namespace LexiconMovieApi.Core.DomainContracts;
 public interface IMovieRepository : IRepository<Movie>
 {
     Task<Movie?> GetByIdWithDetailsAsync(int id, bool withActors = false, bool withReviews = false, bool withGenres = false);
+    Task<IEnumerable<Movie>> GetMoviesAsync(int? releaseYear = null, double? duration = null);
 }

@@ -1,5 +1,6 @@
 using Asp.Versioning;
 using LexiconMovieApi.Core.DTOs.Movie;
+using LexiconMovieApi.Core.DTOs.Review;
 using LexiconMovieApi.Data.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,8 @@ namespace LexiconMovieApi.Client.Controllers;
 [Route("api/v{version:apiVersion}/movies")]
 [ApiController]
 [ApiVersion("1.0")]
+[ApiVersion("1.5")]
+[ApiVersion("2.0")]
 public class MoviesController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
@@ -16,10 +19,11 @@ public class MoviesController : ControllerBase
     public MoviesController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
     // GET: api/v1/movies
+    // GET: api/v1/movies?releaseYear=2020&duration=120
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<MovieDto>>> GetMovies()
+    public async Task<ActionResult<IEnumerable<MovieDto>>> GetMovies(int? releaseYear = null, double? duration = null)
     {
-        var movies = await _serviceManager.MovieService.GetAllMoviesAsync();
+        var movies = await _serviceManager.MovieService.GetMoviesAsync(releaseYear, duration);
 
         return Ok(movies);
     }
@@ -49,7 +53,6 @@ public class MoviesController : ControllerBase
     }
 
     // PUT: api/v1/movies/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutMovie(int? id, MovieUpdateDto movie)
     {
@@ -75,8 +78,14 @@ public class MoviesController : ControllerBase
         return NoContent();
     }
 
+    // PATCH: api/v1/movies/5
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchMovie(int? id, MovieUpdateDto movie)
+    {
+        return StatusCode(501, "Not Implemented: Partially updating movies is not supported in this version of the API.");
+    }
+
     // POST: api/v1/movies
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<MovieDto>> PostMovie(MovieCreateDto movie)
     {

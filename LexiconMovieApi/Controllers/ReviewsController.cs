@@ -59,6 +59,13 @@ public class ReviewsController : ControllerBase
         return NoContent();
     }
 
+    // PATCH: api/v1/reviews/5
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchReview(int? id, ReviewUpdateDto review)
+    {
+        return StatusCode(501, "Not Implemented: Partially updating reviews is not supported in this version of the API.");
+    }
+
     // POST: api/v1/reviews
     [HttpPost]
     public async Task<ActionResult<ReviewDto>> PostReview(ReviewCreateDto review)
