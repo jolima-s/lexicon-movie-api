@@ -8,7 +8,7 @@ namespace LexiconMovieApi.Client.Controllers;
 [Route("api/actors")]
 [Route("api/v{version:apiVersion}/actors")]
 [ApiController]
-[ApiVersion("1.0")]
+[ApiVersion("1.5")]
 public class ActorsController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;

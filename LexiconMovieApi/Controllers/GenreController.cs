@@ -8,7 +8,7 @@ namespace LexiconMovieApi.Client.Controllers;
 [Route("api/genres")]
 [Route("api/v{version:apiVersion}/genres")]
 [ApiController]
-[ApiVersion("1.0")]
+[ApiVersion("2.0")]
 public class GenreController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;

@@ -8,7 +8,7 @@ namespace LexiconMovieApi.Client.Controllers;
 [Route("api/reviews")]
 [Route("api/v{version:apiVersion}/reviews")]
 [ApiController]
-[ApiVersion("1.0")]
+[ApiVersion("2.0")]
 public class ReviewsController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
@@ -37,7 +37,6 @@ public class ReviewsController : ControllerBase
     }
 
     // PUT: api/v1/reviews/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutReview(int? id, ReviewUpdateDto review)
     {
@@ -61,7 +60,6 @@ public class ReviewsController : ControllerBase
     }
 
     // POST: api/v1/reviews
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<ReviewDto>> PostReview(ReviewCreateDto review)
     {
