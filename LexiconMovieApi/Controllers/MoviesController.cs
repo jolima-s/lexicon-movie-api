@@ -2,10 +2,12 @@ using Asp.Versioning;
 using LexiconMovieApi.Core.DTOs.Movie;
 using LexiconMovieApi.Core.DTOs.Review;
 using LexiconMovieApi.Data.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LexiconMovieApi.Client.Controllers;
 
+[Authorize]
 [Route("api/movies")]
 [Route("api/v{version:apiVersion}/movies")]
 [ApiController]
